@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C73AA318-950C-4CF9-8EE8-83949B306FC2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MotornaVozila</RootNamespace>
+    <AssemblyName>MotornaVozila</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.2400\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataLayer.cs" />
+    <Compile Include="Dodaj_nEkonomistu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dodaj_nEkonomistu.Designer.cs">
+      <DependentUpon>Dodaj_nEkonomistu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\Azuriraj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\Azuriraj.Designer.cs">
+      <DependentUpon>Azuriraj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\DodajZaposleni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\DodajZaposleni.Designer.cs">
+      <DependentUpon>DodajZaposleni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\PregledZaposleni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\PregledZaposleni.Designer.cs">
+      <DependentUpon>PregledZaposleni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entiteti\Kupac.cs" />
+    <Compile Include="Entiteti\NezavisniEkonomista.cs" />
+    <Compile Include="Entiteti\Salon.cs" />
+    <Compile Include="Entiteti\Servis.cs" />
+    <Compile Include="Entiteti\Specijalnost.cs" />
+    <Compile Include="Entiteti\Vozilo.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entiteti\Zaposleni.cs" />
+    <Compile Include="frmKupac.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKupac.Designer.cs">
+      <DependentUpon>frmKupac.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNezavisniEkonomista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNezavisniEkonomista.Designer.cs">
+      <DependentUpon>frmNezavisniEkonomista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSalon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSalon.Designer.cs">
+      <DependentUpon>frmSalon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmServisi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServisi.Designer.cs">
+      <DependentUpon>frmServisi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSpecijalnost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSpecijalnost.Designer.cs">
+      <DependentUpon>frmSpecijalnost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVozilo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVozilo.Designer.cs">
+      <DependentUpon>frmVozilo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmZaposleni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmZaposleni.Designer.cs">
+      <DependentUpon>frmZaposleni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapiranja\KupacMapiranje.cs" />
+    <Compile Include="Mapiranja\NezavisniEkonomistaMapiranje.cs" />
+    <Compile Include="Mapiranja\SalonMapiranje.cs" />
+    <Compile Include="Mapiranja\ServisMapiranje.cs" />
+    <Compile Include="Mapiranja\SpecijalnostMapiranje.cs" />
+    <Compile Include="Mapiranja\VoziloMapiranje.cs" />
+    <Compile Include="Mapiranja\ZaposleniMapiranje.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dodaj_nEkonomistu.resx">
+      <DependentUpon>Dodaj_nEkonomistu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\Azuriraj.resx">
+      <DependentUpon>Azuriraj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\DodajZaposleni.resx">
+      <DependentUpon>DodajZaposleni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\PregledZaposleni.resx">
+      <DependentUpon>PregledZaposleni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKupac.resx">
+      <DependentUpon>frmKupac.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNezavisniEkonomista.resx">
+      <DependentUpon>frmNezavisniEkonomista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSalon.resx">
+      <DependentUpon>frmSalon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmServisi.resx">
+      <DependentUpon>frmServisi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSpecijalnost.resx">
+      <DependentUpon>frmSpecijalnost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVozilo.resx">
+      <DependentUpon>frmVozilo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmZaposleni.resx">
+      <DependentUpon>frmZaposleni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
