@@ -65,8 +65,9 @@
             this.dgvZaposleni.GridColor = System.Drawing.SystemColors.Control;
             this.dgvZaposleni.Location = new System.Drawing.Point(18, 144);
             this.dgvZaposleni.Name = "dgvZaposleni";
-            this.dgvZaposleni.Size = new System.Drawing.Size(1002, 242);
+            this.dgvZaposleni.Size = new System.Drawing.Size(1022, 242);
             this.dgvZaposleni.TabIndex = 0;
+            this.dgvZaposleni.SelectionChanged += new System.EventHandler(this.dgvZaposleni_SelectionChanged);
             // 
             // txt_maticni_broj
             // 
@@ -86,12 +87,13 @@
             // 
             // btn_sacuvaj
             // 
-            this.btn_sacuvaj.Location = new System.Drawing.Point(783, 108);
+            this.btn_sacuvaj.Location = new System.Drawing.Point(803, 108);
             this.btn_sacuvaj.Name = "btn_sacuvaj";
             this.btn_sacuvaj.Size = new System.Drawing.Size(75, 23);
             this.btn_sacuvaj.TabIndex = 3;
             this.btn_sacuvaj.Text = "Sacuvaj";
             this.btn_sacuvaj.UseVisualStyleBackColor = true;
+            this.btn_sacuvaj.Click += new System.EventHandler(this.btn_sacuvaj_Click);
             // 
             // label2
             // 
@@ -194,7 +196,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(780, 18);
+            this.label9.Location = new System.Drawing.Point(800, 18);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 13);
             this.label9.TabIndex = 21;
@@ -212,7 +214,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(780, 41);
+            this.label11.Location = new System.Drawing.Point(800, 41);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(111, 13);
             this.label11.TabIndex = 22;
@@ -234,37 +236,40 @@
             // 
             // dtp_datum_isteka_ugovora
             // 
-            this.dtp_datum_isteka_ugovora.Location = new System.Drawing.Point(897, 41);
+            this.dtp_datum_isteka_ugovora.Location = new System.Drawing.Point(917, 41);
             this.dtp_datum_isteka_ugovora.Name = "dtp_datum_isteka_ugovora";
             this.dtp_datum_isteka_ugovora.Size = new System.Drawing.Size(123, 20);
             this.dtp_datum_isteka_ugovora.TabIndex = 25;
             // 
             // btn_obustavi
             // 
-            this.btn_obustavi.Location = new System.Drawing.Point(864, 108);
+            this.btn_obustavi.Location = new System.Drawing.Point(884, 108);
             this.btn_obustavi.Name = "btn_obustavi";
             this.btn_obustavi.Size = new System.Drawing.Size(75, 23);
             this.btn_obustavi.TabIndex = 26;
             this.btn_obustavi.Text = "Obustavi";
             this.btn_obustavi.UseVisualStyleBackColor = true;
+            this.btn_obustavi.Click += new System.EventHandler(this.btn_obustavi_Click);
             // 
             // btn_obrisi
             // 
-            this.btn_obrisi.Location = new System.Drawing.Point(945, 108);
+            this.btn_obrisi.Location = new System.Drawing.Point(965, 108);
             this.btn_obrisi.Name = "btn_obrisi";
             this.btn_obrisi.Size = new System.Drawing.Size(75, 23);
             this.btn_obrisi.TabIndex = 27;
             this.btn_obrisi.Text = "Obrisi";
             this.btn_obrisi.UseVisualStyleBackColor = true;
+            this.btn_obrisi.Click += new System.EventHandler(this.btn_obrisi_Click);
             // 
             // btn_novi
             // 
-            this.btn_novi.Location = new System.Drawing.Point(945, 79);
+            this.btn_novi.Location = new System.Drawing.Point(965, 79);
             this.btn_novi.Name = "btn_novi";
             this.btn_novi.Size = new System.Drawing.Size(75, 23);
             this.btn_novi.TabIndex = 28;
             this.btn_novi.Text = "Novi";
             this.btn_novi.UseVisualStyleBackColor = true;
+            this.btn_novi.Click += new System.EventHandler(this.btn_novi_Click);
             // 
             // cb_tip_zaposlenog
             // 
@@ -283,7 +288,7 @@
             this.cb_tip_ugovora.Items.AddRange(new object[] {
             "za stalno",
             "na odredjeno"});
-            this.cb_tip_ugovora.Location = new System.Drawing.Point(897, 15);
+            this.cb_tip_ugovora.Location = new System.Drawing.Point(917, 15);
             this.cb_tip_ugovora.Name = "cb_tip_ugovora";
             this.cb_tip_ugovora.Size = new System.Drawing.Size(123, 21);
             this.cb_tip_ugovora.TabIndex = 30;
@@ -292,7 +297,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 398);
+            this.ClientSize = new System.Drawing.Size(1056, 398);
             this.Controls.Add(this.cb_tip_ugovora);
             this.Controls.Add(this.cb_tip_zaposlenog);
             this.Controls.Add(this.btn_novi);

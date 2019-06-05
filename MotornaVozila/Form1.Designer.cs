@@ -158,7 +158,7 @@
             // 
             // btn_zaposleni
             // 
-            this.btn_zaposleni.Location = new System.Drawing.Point(232, 32);
+            this.btn_zaposleni.Location = new System.Drawing.Point(228, 32);
             this.btn_zaposleni.Name = "btn_zaposleni";
             this.btn_zaposleni.Size = new System.Drawing.Size(75, 23);
             this.btn_zaposleni.TabIndex = 12;
