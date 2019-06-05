@@ -86,6 +86,8 @@ namespace MotornaVozila
             dgvServisi.Columns["DatumZavrsetka"].Width = 130;
             dgvServisi.Columns["DatumPrijema"].Width = 130;
 
+            txt_tip_usluge.Enabled = false;
+
             session.Close();
         }
 
@@ -95,6 +97,7 @@ namespace MotornaVozila
                 return;
             else
             {
+                txt_tip_usluge.Enabled = false;
                 dtp_datum_prijema.Value = DateTime.Parse(dgvServisi.SelectedRows[0].Cells[1].Value.ToString());
                 dtp_datum_zavrsetka.Value = DateTime.Parse(dgvServisi.SelectedRows[0].Cells[4].Value.ToString());
                 txt_id_sef.Text = dgvServisi.SelectedRows[0].Cells[2].Value.ToString();
@@ -107,7 +110,7 @@ namespace MotornaVozila
         private void btn_novi_Click(object sender, EventArgs e)
         {
             noviServis = true;
-
+            txt_tip_usluge.Enabled = true;
             dtp_datum_prijema.Value = DateTime.Now;
             dtp_datum_zavrsetka.Value = DateTime.Now;
             txt_id_sef.Text = string.Empty;
@@ -271,7 +274,7 @@ namespace MotornaVozila
                         return;
                     }
 
-                    servis.tipuUsluge = txt_tip_usluge.Text;
+                    // servis.tipuUsluge = txt_tip_usluge.Text;
 
                     var srvs_tehnicar = (from teh in session.Query<Zaposleni>()
                                          where teh.id == int.Parse(txt_id_tehnicar.Text)

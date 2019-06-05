@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace MotornaVozila.Entiteti
 {
-    public class Kupac
+    public abstract class Kupac
     {
         public virtual int id { get; protected set; }
         public virtual string ime { get; set; }
@@ -23,5 +23,16 @@ namespace MotornaVozila.Entiteti
         {
             vozila = new List<Vozilo>();
         }
+
+    }
+
+    public class Fizicko : Kupac
+    {
+        public override Double? maticniBroj { get; set; }
+    }
+
+    public class Pravno : Kupac
+    {
+        public override Double? pib { get; set; }
     }
 }
