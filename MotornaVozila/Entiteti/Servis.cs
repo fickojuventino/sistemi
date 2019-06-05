@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MotornaVozila.Entiteti
 {
-    public class Servis
+    public abstract class Servis
     {
         public virtual int id { get; protected set; }
         public virtual DateTime? datumPrijema { get; set; }
@@ -24,5 +24,20 @@ namespace MotornaVozila.Entiteti
         {
             servisiranaVozila = new List<Vozilo>();
         }
+    }
+
+    public class Mehanicarska : Servis
+    {
+
+    }
+
+    public class Farbarska : Servis
+    {
+
+    }
+
+    public class Vulkanizerska : Servis
+    {
+
     }
 }

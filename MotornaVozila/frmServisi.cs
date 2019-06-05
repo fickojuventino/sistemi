@@ -66,13 +66,13 @@ namespace MotornaVozila
             foreach (var srvs in servisi)
             {
                 var newRow = _servisi.NewRow();
-
+    
                 newRow[0] = srvs.id;
                 newRow[1] = srvs.datumPrijema;
                 newRow[2] = srvs.sef.id;
                 newRow[3] = srvs.salon.idSalon;
                 newRow[4] = srvs.datumZavrsetka;
-                newRow[5] = srvs.tipuUsluge;
+                newRow[5] = srvs.GetType().ToString().Split('.')[2].ToLower();
                 newRow[6] = srvs.odgovorniTehnicar.id;
 
                 _servisi.Rows.Add(newRow);
@@ -140,40 +140,103 @@ namespace MotornaVozila
 
                     ISession session = DataLayer.GetSession();
 
-                    Servis servis = new Servis();
+                    //Servis servis = new Servis();
 
                     DateTime datum_prijema = DateTime.Parse(dtp_datum_prijema.Text);
                     DateTime datum_zavrsetka = DateTime.Parse(dtp_datum_zavrsetka.Text);
 
-                    servis.datumPrijema = datum_prijema;
-
-                    if(DateTime.Compare(datum_prijema, datum_zavrsetka) <= 0)
-                        servis.datumZavrsetka = datum_zavrsetka;
-                    else
+                    switch (txt_tip_usluge.Text.ToLower())
                     {
-                        MessageBox.Show("Datum prijema ne moze biti veci od dana zavrsetka", "Upozorenje", MessageBoxButtons.OK,
-                             MessageBoxIcon.Warning);
-                        return;
+                        case "mehanicarska":
+                            Mehanicarska meh = new Mehanicarska();
+                            meh.datumPrijema = datum_prijema;
+
+                            if (DateTime.Compare(datum_prijema, datum_zavrsetka) <= 0)
+                                meh.datumZavrsetka = datum_zavrsetka;
+                            else
+                            {
+                                MessageBox.Show("Datum prijema ne moze biti veci od dana zavrsetka", "Upozorenje", MessageBoxButtons.OK,
+                                     MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            var srvs_tehnicar = (from teh in session.Query<Zaposleni>()
+                                                 where teh.id == int.Parse(txt_id_tehnicar.Text)
+                                                 select teh).SingleOrDefault();
+                            meh.odgovorniTehnicar = srvs_tehnicar;
+
+                            var srvs_sef = (from sef in session.Query<Zaposleni>()
+                                            where sef.id == int.Parse(txt_id_sef.Text)
+                                            select sef).SingleOrDefault();
+                            meh.sef = srvs_sef;
+
+                            var srvs_salon = (from sln in session.Query<Salon>()
+                                              where sln.idSalon == int.Parse(txt_id_salon.Text)
+                                              select sln).SingleOrDefault();
+                            meh.salon = srvs_salon;
+                            session.SaveOrUpdate(meh);
+                            break;
+                        case "farbarska":
+                            Farbarska far = new Farbarska();
+                            far.datumPrijema = datum_prijema;
+
+                            if (DateTime.Compare(datum_prijema, datum_zavrsetka) <= 0)
+                                far.datumZavrsetka = datum_zavrsetka;
+                            else
+                            {
+                                MessageBox.Show("Datum prijema ne moze biti veci od dana zavrsetka", "Upozorenje", MessageBoxButtons.OK,
+                                     MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            var srv_tehnicar = (from teh in session.Query<Zaposleni>()
+                                                 where teh.id == int.Parse(txt_id_tehnicar.Text)
+                                                 select teh).SingleOrDefault();
+                            far.odgovorniTehnicar = srv_tehnicar;
+
+                            var srv_sef = (from sef in session.Query<Zaposleni>()
+                                            where sef.id == int.Parse(txt_id_sef.Text)
+                                            select sef).SingleOrDefault();
+                            far.sef = srv_sef;
+
+                            var srv_salon = (from sln in session.Query<Salon>()
+                                              where sln.idSalon == int.Parse(txt_id_salon.Text)
+                                              select sln).SingleOrDefault();
+                            far.salon = srv_salon;
+                            session.SaveOrUpdate(far);
+                            break;
+                        case "vulkanizerska":
+                            Vulkanizerska vul = new Vulkanizerska();
+                            vul.datumPrijema = datum_prijema;
+
+                            if (DateTime.Compare(datum_prijema, datum_zavrsetka) <= 0)
+                                vul.datumZavrsetka = datum_zavrsetka;
+                            else
+                            {
+                                MessageBox.Show("Datum prijema ne moze biti veci od dana zavrsetka", "Upozorenje", MessageBoxButtons.OK,
+                                     MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            var svs_tehnicar = (from teh in session.Query<Zaposleni>()
+                                                 where teh.id == int.Parse(txt_id_tehnicar.Text)
+                                                 select teh).SingleOrDefault();
+                            vul.odgovorniTehnicar = svs_tehnicar;
+
+                            var svs_sef = (from sef in session.Query<Zaposleni>()
+                                            where sef.id == int.Parse(txt_id_sef.Text)
+                                            select sef).SingleOrDefault();
+                            vul.sef = svs_sef;
+
+                            var svs_salon = (from sln in session.Query<Salon>()
+                                              where sln.idSalon == int.Parse(txt_id_salon.Text)
+                                              select sln).SingleOrDefault();
+                            vul.salon = svs_salon;
+                            session.SaveOrUpdate(vul);
+                            break;
+                        default:
+                            break;
                     }
-
-                    servis.tipuUsluge = txt_tip_usluge.Text;
-
-                    var srvs_tehnicar = (from teh in session.Query<Zaposleni>()
-                                         where teh.id == int.Parse(txt_id_tehnicar.Text)
-                                         select teh).SingleOrDefault();
-                    servis.odgovorniTehnicar = srvs_tehnicar;
-
-                    var srvs_sef = (from sef in session.Query<Zaposleni>()
-                                    where sef.id == int.Parse(txt_id_sef.Text)
-                                    select sef).SingleOrDefault();
-                    servis.sef = srvs_sef;
-
-                    var srvs_salon = (from sln in session.Query<Salon>()
-                                      where sln.idSalon == int.Parse(txt_id_salon.Text)
-                                      select sln).SingleOrDefault();
-                    servis.salon = srvs_salon;                    
-
-                    session.SaveOrUpdate(servis);
 
                     session.Flush();
                     session.Close();

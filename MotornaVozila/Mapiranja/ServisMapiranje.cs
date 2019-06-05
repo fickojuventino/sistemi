@@ -15,15 +15,41 @@ namespace MotornaVozila.Mapiranja
 
             Id(x => x.id, "IDSERVIS").GeneratedBy.TriggerIdentity();
 
+            // mapiranje podklasa
+            DiscriminateSubClassesOnColumn("TIPUSLUGE");
+
             Map(x => x.datumPrijema, "DATUMPRIJEMA");
             Map(x => x.datumZavrsetka, "DATUMZAVRSETKA");
-            Map(x => x.tipuUsluge, "TIPUSLUGE");
+            //Map(x => x.tipuUsluge, "TIPUSLUGE");
 
-            // reference dodati
             References(x => x.odgovorniTehnicar).Column("IDTEHNICAR").LazyLoad();
             References(x => x.sef).Column("IDSEF").LazyLoad();
             References(x => x.salon).Column("IDSALON").LazyLoad();
             HasMany(x => x.servisiranaVozila).KeyColumn("IDSERVIS");
+        }
+    }
+
+    class MehanicarskaMapiranje : SubclassMap<Mehanicarska>
+    {
+        public MehanicarskaMapiranje()
+        {
+            DiscriminatorValue("mehanicarska");
+        }
+    }
+
+    class FarbarskaMapiranje : SubclassMap<Farbarska>
+    {
+        public FarbarskaMapiranje()
+        {
+            DiscriminatorValue("farbarska");
+        }
+    }
+
+    class VulkanizerskaMapiranje : SubclassMap<Vulkanizerska>
+    {
+        public VulkanizerskaMapiranje()
+        {
+            DiscriminatorValue("vulkanizerska");
         }
     }
 }
