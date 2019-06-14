@@ -43,62 +43,62 @@ namespace MotornaVozila.Employee
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ISession session = DataLayer.GetSession();
+            //try
+            //{
+            //    ISession session = DataLayer.GetSession();
 
-                Zaposleni zaposleni = new Zaposleni();
+            //    Zaposleni zaposleni = new Zaposleni();
 
-                zaposleni.ime = tbIme.Text.ToString();
-                zaposleni.prezime = tbPrezime.Text.ToString();
-                zaposleni.maticniBroj = long.Parse(tbMatBr.Text.ToString());
-                zaposleni.datumRodjenja = Convert.ToDateTime(dtpDatumRodjenja.Text.ToString());
-                zaposleni.datumZaposlenja = Convert.ToDateTime(dtpDatumZaposlenja.Text.ToString());
-                zaposleni.datumIstekaUgovora = Convert.ToDateTime(dtpDatumIsteka.Text.ToString());
-                zaposleni.stepenStrucneSpreme = int.Parse(tbStepenStSpreme.Text.ToString());
-                zaposleni.godineRadnogStaza = int.Parse(tbGodRadStaza.Text.ToString());
-                zaposleni.plata = double.Parse(tbPlata.Text.ToString());
-                zaposleni.tipUgovora = cmbTipUgovora.SelectedItem.ToString();
-                zaposleni.tipZaposlenog = cmbTipZaposlenog.SelectedItem.ToString();
+            //    zaposleni.ime = tbIme.Text.ToString();
+            //    zaposleni.prezime = tbPrezime.Text.ToString();
+            //    zaposleni.maticniBroj = long.Parse(tbMatBr.Text.ToString());
+            //    zaposleni.datumRodjenja = Convert.ToDateTime(dtpDatumRodjenja.Text.ToString());
+            //    zaposleni.datumZaposlenja = Convert.ToDateTime(dtpDatumZaposlenja.Text.ToString());
+            //    zaposleni.datumIstekaUgovora = Convert.ToDateTime(dtpDatumIsteka.Text.ToString());
+            //    zaposleni.stepenStrucneSpreme = int.Parse(tbStepenStSpreme.Text.ToString());
+            //    zaposleni.godineRadnogStaza = int.Parse(tbGodRadStaza.Text.ToString());
+            //    zaposleni.plata = double.Parse(tbPlata.Text.ToString());
+            //    zaposleni.tipUgovora = cmbTipUgovora.SelectedItem.ToString();
+            //    zaposleni.tipZaposlenog = cmbTipZaposlenog.SelectedItem.ToString();
 
-                if (tbSefSalona.Text.ToString() != "ID" && !String.IsNullOrEmpty(tbSefSalona.Text))
-                {
-                    int idSefSalona = int.Parse(tbSefSalona.Text.ToString());
+            //    if (tbSefSalona.Text.ToString() != "ID" && !String.IsNullOrEmpty(tbSefSalona.Text))
+            //    {
+            //        int idSefSalona = int.Parse(tbSefSalona.Text.ToString());
 
-                    Salon salon = new Salon();
-                    salon = session.Load<Salon>(idSefSalona);
+            //        Salon salon = new Salon();
+            //        salon = session.Load<Salon>(idSefSalona);
 
-                    // uklanja vezu izmedju prethodnog sefa salona i salona
-                    Zaposleni zap2 = new Zaposleni();
-                    zap2 = session.Load<Zaposleni>(salon.sef.id);
-                    zap2.saloniSef.Remove(salon);
+            //        // uklanja vezu izmedju prethodnog sefa salona i salona
+            //        Zaposleni zap2 = new Zaposleni();
+            //        zap2 = session.Load<Zaposleni>(salon.sef.id);
+            //        zap2.saloniSef.Remove(salon);
 
-                    // postavlja novog sefa
-                    salon.sef = zaposleni;
-                    zaposleni.saloniSef.Add(salon);
-                }
+            //        // postavlja novog sefa
+            //        salon.sef = zaposleni;
+            //        zaposleni.saloniSef.Add(salon);
+            //    }
 
-                if (tbSefServisa.Text.ToString() != "ID" && !String.IsNullOrEmpty(tbSefServisa.Text))
-                {
-                    // dovrsiti fju
-                    int idSefServisa = int.Parse(tbSefServisa.Text.ToString());
-                }
-                if (tbOdgovorniTehnicar.Text.ToString() != "ID" && !String.IsNullOrEmpty(tbOdgovorniTehnicar.Text))
-                {
-                    // dovrsiti fju
-                    int idOdgovorniTehnicar = int.Parse(tbOdgovorniTehnicar.Text.ToString());
-                }
+            //    if (tbSefServisa.Text.ToString() != "ID" && !String.IsNullOrEmpty(tbSefServisa.Text))
+            //    {
+            //        // dovrsiti fju
+            //        int idSefServisa = int.Parse(tbSefServisa.Text.ToString());
+            //    }
+            //    if (tbOdgovorniTehnicar.Text.ToString() != "ID" && !String.IsNullOrEmpty(tbOdgovorniTehnicar.Text))
+            //    {
+            //        // dovrsiti fju
+            //        int idOdgovorniTehnicar = int.Parse(tbOdgovorniTehnicar.Text.ToString());
+            //    }
 
 
-                session.SaveOrUpdate(zaposleni);
+            //    session.SaveOrUpdate(zaposleni);
 
-                session.Flush();
-                session.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //    session.Flush();
+            //    session.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void btnAzuriraj_Click(object sender, EventArgs e)
@@ -118,13 +118,13 @@ namespace MotornaVozila.Employee
 
             zaposleni.datumRodjenja = Convert.ToDateTime(dtpDatumRodjenja.Text.ToString());
             zaposleni.datumZaposlenja = Convert.ToDateTime(dtpDatumZaposlenja.Text.ToString());
-            zaposleni.datumIstekaUgovora = Convert.ToDateTime(dtpDatumIsteka.Text.ToString());
+            //zaposleni.datumIstekaUgovora = Convert.ToDateTime(dtpDatumIsteka.Text.ToString());
             if (!String.IsNullOrEmpty(tbStepenStSpreme.Text))
                 zaposleni.stepenStrucneSpreme = int.Parse(tbStepenStSpreme.Text.ToString());
             if (!String.IsNullOrEmpty(tbGodRadStaza.Text))
                 zaposleni.godineRadnogStaza = int.Parse(tbGodRadStaza.Text.ToString());
-            if (!String.IsNullOrEmpty(tbPlata.Text))
-                zaposleni.plata = double.Parse(tbPlata.Text.ToString());
+            //if (!String.IsNullOrEmpty(tbPlata.Text))
+            //    zaposleni.plata = double.Parse(tbPlata.Text.ToString());
             zaposleni.tipUgovora = cmbTipUgovora.SelectedItem.ToString();
             zaposleni.tipZaposlenog = cmbTipZaposlenog.SelectedItem.ToString();
 

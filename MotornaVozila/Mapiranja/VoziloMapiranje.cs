@@ -15,6 +15,8 @@ namespace MotornaVozila.Mapiranja
 
             Id(x => x.id, "IDVOZILO").GeneratedBy.TriggerIdentity();
 
+            DiscriminateSubClassesOnColumn("TIPVOZILA");
+
             Map(x => x.brojSasije, "BRSASIJE");
             Map(x => x.boja, "BOJA");
             Map(x => x.brojMotora, "BROJMOTORA");
@@ -22,16 +24,16 @@ namespace MotornaVozila.Mapiranja
             Map(x => x.modelVozila, "MODELVOZILA");
             Map(x => x.kubikaza, "KUBIKAZA");
             Map(x => x.datumUvoza, "DATUMUVOZA");
-            Map(x => x.brojPutnika, "BROJPUTNIKA");
-            Map(x => x.tipProstora, "TIPPROSTORA");
-            Map(x => x.nosivost, "NOSIVOST");
+            //Map(x => x.brojPutnika, "BROJPUTNIKA");
+            //Map(x => x.tipProstora, "TIPPROSTORA");
+            //Map(x => x.nosivost, "NOSIVOST");
             Map(x => x.datumKupovine, "DATUMKUPOVINE");
             Map(x => x.poznato, "POZNATO");
             Map(x => x.opisProblema, "OPISPROBLEMA");
             Map(x => x.ime, "IME");
             Map(x => x.prezime, "PREZIME");
             Map(x => x.telefon, "TELEFON");
-            Map(x => x.tipVozila, "TIPVOZILA");
+            //Map(x => x.tipVozila, "TIPVOZILA");
             Map(x => x.registarskiBroj, "REGBR");
             Map(x => x.godinaProizvodnje, "GODPROIZVODNJE");
 
@@ -39,6 +41,26 @@ namespace MotornaVozila.Mapiranja
             References(x => x.kupac).Column("IDKUPAC").LazyLoad();
             References(x => x.servis).Column("IDSERVIS").LazyLoad();
             References(x => x.salon).Column("IDSALON").LazyLoad();
+        }
+    }
+    class PutnickoMapiranje : SubclassMap<Putnicko>
+    {
+        public PutnickoMapiranje()
+        {
+            DiscriminatorValue("putnicko");
+            Map(x => x.brojPutnika, "BROJPUTNIKA");
+            Map(x => x.tipVozila, "TIPVOZILA");
+        }
+    }
+
+    class TeretnoMapiranje : SubclassMap<Teretno>
+    {
+        public TeretnoMapiranje()
+        {
+            DiscriminatorValue("teretno");
+            Map(x => x.tipProstora, "TIPPROSTORA");
+            Map(x => x.nosivost, "NOSIVOST");
+            Map(x => x.tipVozila, "TIPVOZILA");
         }
     }
 }

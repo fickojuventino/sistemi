@@ -47,6 +47,8 @@
             this.cb_tip_lica = new System.Windows.Forms.ComboBox();
             this.txt_id_kup_vozila = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.cb_prikaz = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKupac)).BeginInit();
             this.SuspendLayout();
             // 
@@ -200,6 +202,7 @@
             this.cb_tip_lica.Name = "cb_tip_lica";
             this.cb_tip_lica.Size = new System.Drawing.Size(126, 21);
             this.cb_tip_lica.TabIndex = 17;
+            this.cb_tip_lica.SelectedIndexChanged += new System.EventHandler(this.cb_tip_lica_SelectedIndexChanged);
             // 
             // txt_id_kup_vozila
             // 
@@ -217,11 +220,34 @@
             this.label7.TabIndex = 19;
             this.label7.Text = "Id Kupljenog Vozila";
             // 
+            // cb_prikaz
+            // 
+            this.cb_prikaz.FormattingEnabled = true;
+            this.cb_prikaz.Items.AddRange(new object[] {
+            "fizicko",
+            "pravno"});
+            this.cb_prikaz.Location = new System.Drawing.Point(27, 257);
+            this.cb_prikaz.Name = "cb_prikaz";
+            this.cb_prikaz.Size = new System.Drawing.Size(156, 21);
+            this.cb_prikaz.TabIndex = 20;
+            this.cb_prikaz.SelectedIndexChanged += new System.EventHandler(this.cb_prikaz_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(24, 241);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(43, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Pregled";
+            // 
             // frmKupac
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 322);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cb_prikaz);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txt_id_kup_vozila);
             this.Controls.Add(this.cb_tip_lica);
@@ -271,5 +297,7 @@
         private System.Windows.Forms.ComboBox cb_tip_lica;
         private System.Windows.Forms.TextBox txt_id_kup_vozila;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cb_prikaz;
+        private System.Windows.Forms.Label label8;
     }
 }

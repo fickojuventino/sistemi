@@ -43,69 +43,97 @@ namespace MotornaVozila
                 dgvZaposleni.RowHeadersVisible = false;
             };
 
-            GetData();
+            cb_prikaz.SelectedIndex = 0;
+            GetData("za stalno");
+            dtp_datum_isteka_ugovora.Enabled = false;
         }
 
-        private void GetData()
+        private void GetData(string tipUgovora)
         {
-            _zaposleni = new DataTable();
-
-            _zaposleni.Columns.Add("Id");
-            _zaposleni.Columns.Add("MaticniBroj");
-            _zaposleni.Columns.Add("Ime");
-            _zaposleni.Columns.Add("Prezime");
-            _zaposleni.Columns.Add("GodRadnogStaza");
-            _zaposleni.Columns.Add("DatumZaposlenja");
-            _zaposleni.Columns.Add("DatumRodjenja");
-            _zaposleni.Columns.Add("StepenStrSpreme");
-            _zaposleni.Columns.Add("Plata");
-            _zaposleni.Columns.Add("TipZaposlenog");
-            _zaposleni.Columns.Add("TipUgovora");
-            _zaposleni.Columns.Add("DatumIstekaUgovora");
 
             ISession session = DataLayer.GetSession();
 
-            var zaposleni = (from z in session.Query<Zaposleni>()
-                         select z).ToList();
-
-            foreach (var z in zaposleni)
+            if (tipUgovora == "za stalno")
             {
-                var newRow = _zaposleni.NewRow();
+                List<ZaStalno> zaposleni = (from z in session.Query<ZaStalno>()
+                                      select z).ToList();
 
-                newRow[0] = z.id;
-                newRow[1] = z.maticniBroj;
-                newRow[2] = z.ime;
-                newRow[3] = z.prezime;
-                newRow[4] = z.godineRadnogStaza;
-                newRow[5] = z.datumZaposlenja.ToShortDateString();
-                newRow[6] = z.datumRodjenja.ToShortDateString();
-                newRow[7] = z.stepenStrucneSpreme;
+                
+                _zaposleni = new DataTable();
 
-                if (z.plata == null)
-                    newRow[8] = string.Empty;
-                else
-                    newRow[8] = z.plata;
+                _zaposleni.Columns.Add("Id");
+                _zaposleni.Columns.Add("MaticniBroj");
+                _zaposleni.Columns.Add("Ime");
+                _zaposleni.Columns.Add("Prezime");
+                _zaposleni.Columns.Add("GodineRadnogStaza");
+                _zaposleni.Columns.Add("DatumZaposlenja");
+                _zaposleni.Columns.Add("DatumRodjenja");
+                _zaposleni.Columns.Add("Stepen strucne spreme");
+                _zaposleni.Columns.Add("TipZaposlenog");
+                _zaposleni.Columns.Add("TipUgovora");
+                _zaposleni.Columns.Add("Plata");
 
-                newRow[9] = z.tipZaposlenog;
-                newRow[10] = z.tipUgovora;
+                foreach (var z in zaposleni)
+                {
+                    var newRow = _zaposleni.NewRow();
 
-                if (z.datumIstekaUgovora == null)
-                    newRow[11] = string.Empty;
-                else
-                    newRow[11] = z.datumIstekaUgovora.Value.ToShortDateString();
+                    newRow[0] = z.id;
+                    newRow[1] = z.maticniBroj;
+                    newRow[2] = z.ime;
+                    newRow[3] = z.prezime;
+                    newRow[4] = z.godineRadnogStaza;
+                    newRow[5] = z.datumZaposlenja.ToShortDateString();
+                    newRow[6] = z.datumRodjenja.ToShortDateString();
+                    newRow[7] = z.stepenStrucneSpreme;
+                    newRow[8] = z.tipZaposlenog;
+                    newRow[9] = z.tipUgovora;
+                    newRow[10] = z.plata;
 
-                _zaposleni.Rows.Add(newRow);
+                    _zaposleni.Rows.Add(newRow);
+                }
+
+                dgvZaposleni.DataSource = _zaposleni;
             }
+            else
+            {
+                List<NaOdredjeno> zaposleni = (from z in session.Query<NaOdredjeno>()
+                                            select z).ToList();
 
-            dgvZaposleni.DataSource = _zaposleni;
+                _zaposleni = new DataTable();
 
-            dgvZaposleni.Columns["Id"].Width = 40;
-            dgvZaposleni.Columns["Ime"].Width = 60;
-            dgvZaposleni.Columns["Prezime"].Width = 70;
-            dgvZaposleni.Columns["Plata"].Width = 60;
-            dgvZaposleni.Columns["DatumIstekaUgovora"].Width = 115;
-            dgvZaposleni.Columns["TipZaposlenog"].Width = 85;
-            dgvZaposleni.Columns["TipUgovora"].Width = 80;
+                _zaposleni.Columns.Add("Id");
+                _zaposleni.Columns.Add("MaticniBroj");
+                _zaposleni.Columns.Add("Ime");
+                _zaposleni.Columns.Add("Prezime");
+                _zaposleni.Columns.Add("GodineRadnogStaza");
+                _zaposleni.Columns.Add("DatumZaposlenja");
+                _zaposleni.Columns.Add("DatumRodjenja");
+                _zaposleni.Columns.Add("StepenStrucneSpreme");
+                _zaposleni.Columns.Add("TipZaposlenog");
+                _zaposleni.Columns.Add("TipUgovora");
+                _zaposleni.Columns.Add("DatumIstekaUgovora");
+
+                foreach (var z in zaposleni)
+                {
+                    var newRow = _zaposleni.NewRow();
+
+                    newRow[0] = z.id;
+                    newRow[1] = z.maticniBroj;
+                    newRow[2] = z.ime;
+                    newRow[3] = z.prezime;
+                    newRow[4] = z.godineRadnogStaza;
+                    newRow[5] = z.datumZaposlenja.ToShortDateString();
+                    newRow[6] = z.datumRodjenja.ToShortDateString();
+                    newRow[7] = z.stepenStrucneSpreme;
+                    newRow[8] = z.tipZaposlenog;
+                    newRow[9] = z.tipUgovora;
+                    newRow[10] = z.datumIstekaUgovora.ToShortDateString();
+
+                    _zaposleni.Rows.Add(newRow);
+                }
+
+                dgvZaposleni.DataSource = _zaposleni;
+            }
 
             session.Close();
         }
@@ -123,12 +151,13 @@ namespace MotornaVozila
                 dtp_datum_zaposlenja.Value = DateTime.Parse(dgvZaposleni.SelectedRows[0].Cells[5].Value.ToString());
                 dtp_datum_rodjenja.Value = DateTime.Parse(dgvZaposleni.SelectedRows[0].Cells[6].Value.ToString());
                 txt_stepen_str_spreme.Text = dgvZaposleni.SelectedRows[0].Cells[7].Value.ToString();
-                txt_plata.Text = dgvZaposleni.SelectedRows[0].Cells[8].Value.ToString();
-                cb_tip_zaposlenog.Text = dgvZaposleni.SelectedRows[0].Cells[9].Value.ToString();
-                cb_tip_ugovora.Text = dgvZaposleni.SelectedRows[0].Cells[10].Value.ToString();
+                cb_tip_zaposlenog.Text = dgvZaposleni.SelectedRows[0].Cells[8].Value.ToString();
+                cb_tip_ugovora.Text = dgvZaposleni.SelectedRows[0].Cells[9].Value.ToString();
 
-                if (!string.IsNullOrEmpty(dgvZaposleni.SelectedRows[0].Cells[11].Value.ToString()))
-                    dtp_datum_isteka_ugovora.Value = DateTime.Parse(dgvZaposleni.SelectedRows[0].Cells[11].Value.ToString());
+                if (cb_prikaz.Text == "za stalno")
+                    txt_plata.Text = dgvZaposleni.SelectedRows[0].Cells[10].Value.ToString();
+                else if (!string.IsNullOrEmpty(dgvZaposleni.SelectedRows[0].Cells[10].Value.ToString()))
+                    dtp_datum_isteka_ugovora.Value = DateTime.Parse(dgvZaposleni.SelectedRows[0].Cells[10].Value.ToString());
                 else dtp_datum_isteka_ugovora.Value = DateTime.Now;
             }
         }
@@ -164,57 +193,113 @@ namespace MotornaVozila
                 {
                     ISession session = DataLayer.GetSession();
 
-                    Zaposleni zaposleni = new Zaposleni();
+                    switch(cb_tip_ugovora.Text)
+                    {
+                        case "za stalno":
+                            {
+                                ZaStalno zaposleni = new ZaStalno();
 
-                    zaposleni.maticniBroj = long.Parse(txt_maticni_broj.Text);
-                    zaposleni.ime = txt_ime.Text;
-                    zaposleni.prezime = txt_prezime.Text;
-                    zaposleni.godineRadnogStaza = int.Parse(txt_god_rad_staza.Text);
+                                zaposleni.maticniBroj = long.Parse(txt_maticni_broj.Text);
+                                zaposleni.ime = txt_ime.Text;
+                                zaposleni.prezime = txt_prezime.Text;
+                                zaposleni.godineRadnogStaza = int.Parse(txt_god_rad_staza.Text);
+                                zaposleni.datumZaposlenja = dtp_datum_zaposlenja.Value;
+                                zaposleni.datumRodjenja = dtp_datum_rodjenja.Value;
+                                zaposleni.stepenStrucneSpreme = int.Parse(txt_stepen_str_spreme.Text);
+                                zaposleni.tipZaposlenog = cb_tip_zaposlenog.Text;
+                                zaposleni.tipUgovora = cb_tip_ugovora.Text;
+                                zaposleni.plata = double.Parse(txt_plata.Text);
 
-                    if (cb_tip_ugovora.Text == "za stalno") zaposleni.datumIstekaUgovora = null;
-                    else zaposleni.datumIstekaUgovora = dtp_datum_isteka_ugovora.Value;
+                                session.Save(zaposleni);
+                                session.Flush();
+                                session.Close();
 
-                    zaposleni.datumRodjenja = dtp_datum_rodjenja.Value;
-                    zaposleni.datumZaposlenja = dtp_datum_zaposlenja.Value;
-                    zaposleni.tipUgovora = cb_tip_ugovora.Text;
-                    zaposleni.tipZaposlenog = cb_tip_zaposlenog.Text;
-                    zaposleni.plata = double.Parse(txt_plata.Text);
-                    zaposleni.stepenStrucneSpreme = int.Parse(txt_stepen_str_spreme.Text);
+                                GetData("za stalno");
+                                noviZaposleni = false;
 
-                    session.Save(zaposleni);
-                    session.Flush();
-                    session.Close();
+                                break;
+                            }
+                        case "na odredjeno":
+                            {
+                                NaOdredjeno zaposleni = new NaOdredjeno();
 
-                    GetData();
-                    noviZaposleni = false;
+                                zaposleni.maticniBroj = long.Parse(txt_maticni_broj.Text);
+                                zaposleni.ime = txt_ime.Text;
+                                zaposleni.prezime = txt_prezime.Text;
+                                zaposleni.godineRadnogStaza = int.Parse(txt_god_rad_staza.Text);
+                                zaposleni.datumZaposlenja = dtp_datum_zaposlenja.Value;
+                                zaposleni.datumRodjenja = dtp_datum_rodjenja.Value;
+                                zaposleni.stepenStrucneSpreme = int.Parse(txt_stepen_str_spreme.Text);
+                                zaposleni.tipZaposlenog = cb_tip_zaposlenog.Text;
+                                zaposleni.tipUgovora = cb_tip_ugovora.Text;
+                                zaposleni.datumIstekaUgovora = dtp_datum_isteka_ugovora.Value;
+
+                                session.Save(zaposleni);
+                                session.Flush();
+                                session.Close();
+
+                                GetData("na odredjeno");
+                                noviZaposleni = false;
+                                break;
+                            }
+                    }
                 }
                 //azurira postojeceg kupca
                 else
                 {
                     ISession session = DataLayer.GetSession();
                     int id = int.Parse(dgvZaposleni.SelectedRows[0].Cells[0].Value.ToString());
-                    Zaposleni zaposleni = session.Load<Zaposleni>(id);
 
-                    zaposleni.maticniBroj = long.Parse(txt_maticni_broj.Text);
-                    zaposleni.ime = txt_ime.Text;
-                    zaposleni.prezime = txt_prezime.Text;
-                    zaposleni.godineRadnogStaza = int.Parse(txt_god_rad_staza.Text);
+                    switch (cb_tip_ugovora.Text)
+                    {
+                        case "za stalno":
+                            {
+                                var zaposleni = session.Load<ZaStalno>(id);
 
-                    if (cb_tip_ugovora.Text == "za stalno") zaposleni.datumIstekaUgovora = null;
-                    else zaposleni.datumIstekaUgovora = dtp_datum_isteka_ugovora.Value;
+                                zaposleni.maticniBroj = long.Parse(txt_maticni_broj.Text);
+                                zaposleni.ime = txt_ime.Text;
+                                zaposleni.prezime = txt_prezime.Text;
+                                zaposleni.godineRadnogStaza = int.Parse(txt_god_rad_staza.Text);
+                                zaposleni.datumZaposlenja = dtp_datum_zaposlenja.Value;
+                                zaposleni.datumRodjenja = dtp_datum_rodjenja.Value;
+                                zaposleni.stepenStrucneSpreme = int.Parse(txt_stepen_str_spreme.Text);
+                                zaposleni.tipZaposlenog = cb_tip_zaposlenog.Text;
+                                zaposleni.tipUgovora = cb_tip_ugovora.Text;
+                                zaposleni.plata = double.Parse(txt_plata.Text);
 
-                    zaposleni.datumRodjenja = dtp_datum_rodjenja.Value;
-                    zaposleni.datumZaposlenja = dtp_datum_zaposlenja.Value;
-                    zaposleni.tipUgovora = cb_tip_ugovora.Text;
-                    zaposleni.tipZaposlenog = cb_tip_zaposlenog.Text;
-                    zaposleni.plata = double.Parse(txt_plata.Text);
-                    zaposleni.stepenStrucneSpreme = int.Parse(txt_stepen_str_spreme.Text);
+                                session.SaveOrUpdate(zaposleni);
+                                session.Flush();
+                                session.Close();
 
-                    session.SaveOrUpdate(zaposleni);
+                                GetData("za stalno");
+                                noviZaposleni = false;
 
-                    session.Flush();
-                    session.Close();
-                    GetData();
+                                break;
+                            }
+                        case "na odredjeno":
+                            {
+                                var zaposleni = session.Load<NaOdredjeno>(id);
+
+                                zaposleni.maticniBroj = long.Parse(txt_maticni_broj.Text);
+                                zaposleni.ime = txt_ime.Text;
+                                zaposleni.prezime = txt_prezime.Text;
+                                zaposleni.godineRadnogStaza = int.Parse(txt_god_rad_staza.Text);
+                                zaposleni.datumZaposlenja = dtp_datum_zaposlenja.Value;
+                                zaposleni.datumRodjenja = dtp_datum_rodjenja.Value;
+                                zaposleni.stepenStrucneSpreme = int.Parse(txt_stepen_str_spreme.Text);
+                                zaposleni.tipZaposlenog = cb_tip_zaposlenog.Text;
+                                zaposleni.tipUgovora = cb_tip_ugovora.Text;
+                                zaposleni.datumIstekaUgovora = dtp_datum_isteka_ugovora.Value;
+
+                                session.SaveOrUpdate(zaposleni);
+                                session.Flush();
+                                session.Close();
+
+                                GetData("na odredjeno");
+                                noviZaposleni = false;
+                                break;
+                            }
+                    }
                 }
             }
             catch (Exception catchException)
@@ -230,7 +315,7 @@ namespace MotornaVozila
                 if (dgvZaposleni.Rows.Count <= 0 || dgvZaposleni.SelectedRows.Count <= 0)
                     return;
 
-                var dr = MessageBox.Show("Da li ste sigurno da zelite da izbrisete kupca?", "Kupac",
+                var dr = MessageBox.Show("Da li ste sigurno da zelite da izbrisete zaposlenog?", "Zaposleni",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                     return;
@@ -272,11 +357,29 @@ namespace MotornaVozila
                 session.Flush();
                 session.Close();
 
-                GetData();
+                GetData(cb_prikaz.Text);
             }
             catch (Exception catchException)
             {
                 MessageBox.Show(catchException.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cb_prikaz_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cb_prikaz.Text == "za stalno")
+            {
+                GetData("za stalno");
+                dtp_datum_isteka_ugovora.Enabled = false;
+                dtp_datum_isteka_ugovora.Value = DateTime.Now;
+                txt_plata.Enabled = true;
+            }
+            else
+            {
+                GetData("na odredjeno");
+                txt_plata.Enabled = false;
+                txt_plata.Text = string.Empty;
+                dtp_datum_isteka_ugovora.Enabled = true;
             }
         }
     }

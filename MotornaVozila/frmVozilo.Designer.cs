@@ -77,6 +77,8 @@
             this.btn_obustavi = new System.Windows.Forms.Button();
             this.btn_obrisi = new System.Windows.Forms.Button();
             this.btn_novi = new System.Windows.Forms.Button();
+            this.cb_prikaz = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVozilo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -483,11 +485,34 @@
             this.btn_novi.UseVisualStyleBackColor = true;
             this.btn_novi.Click += new System.EventHandler(this.btn_novi_Click);
             // 
+            // cb_prikaz
+            // 
+            this.cb_prikaz.FormattingEnabled = true;
+            this.cb_prikaz.Items.AddRange(new object[] {
+            "putnicko",
+            "teretno"});
+            this.cb_prikaz.Location = new System.Drawing.Point(757, 91);
+            this.cb_prikaz.Name = "cb_prikaz";
+            this.cb_prikaz.Size = new System.Drawing.Size(156, 21);
+            this.cb_prikaz.TabIndex = 50;
+            this.cb_prikaz.SelectedIndexChanged += new System.EventHandler(this.cb_prikaz_SelectedIndexChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(754, 75);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(43, 13);
+            this.label23.TabIndex = 51;
+            this.label23.Text = "Pregled";
+            // 
             // frmVozilo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 418);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.cb_prikaz);
             this.Controls.Add(this.btn_novi);
             this.Controls.Add(this.btn_obrisi);
             this.Controls.Add(this.btn_obustavi);
@@ -597,5 +622,7 @@
         private System.Windows.Forms.Button btn_obustavi;
         private System.Windows.Forms.Button btn_obrisi;
         private System.Windows.Forms.Button btn_novi;
+        private System.Windows.Forms.ComboBox cb_prikaz;
+        private System.Windows.Forms.Label label23;
     }
 }

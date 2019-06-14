@@ -55,6 +55,8 @@
             this.btn_novi = new System.Windows.Forms.Button();
             this.cb_tip_zaposlenog = new System.Windows.Forms.ComboBox();
             this.cb_tip_ugovora = new System.Windows.Forms.ComboBox();
+            this.cb_prikaz = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvZaposleni)).BeginInit();
             this.SuspendLayout();
             // 
@@ -293,11 +295,34 @@
             this.cb_tip_ugovora.Size = new System.Drawing.Size(123, 21);
             this.cb_tip_ugovora.TabIndex = 30;
             // 
+            // cb_prikaz
+            // 
+            this.cb_prikaz.FormattingEnabled = true;
+            this.cb_prikaz.Items.AddRange(new object[] {
+            "za stalno",
+            "na odredjeno"});
+            this.cb_prikaz.Location = new System.Drawing.Point(803, 81);
+            this.cb_prikaz.Name = "cb_prikaz";
+            this.cb_prikaz.Size = new System.Drawing.Size(156, 21);
+            this.cb_prikaz.TabIndex = 31;
+            this.cb_prikaz.SelectedIndexChanged += new System.EventHandler(this.cb_prikaz_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(800, 65);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 13);
+            this.label12.TabIndex = 32;
+            this.label12.Text = "Pregled";
+            // 
             // frmZaposleni
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 398);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.cb_prikaz);
             this.Controls.Add(this.cb_tip_ugovora);
             this.Controls.Add(this.cb_tip_zaposlenog);
             this.Controls.Add(this.btn_novi);
@@ -363,5 +388,7 @@
         private System.Windows.Forms.Button btn_novi;
         private System.Windows.Forms.ComboBox cb_tip_zaposlenog;
         private System.Windows.Forms.ComboBox cb_tip_ugovora;
+        private System.Windows.Forms.ComboBox cb_prikaz;
+        private System.Windows.Forms.Label label12;
     }
 }

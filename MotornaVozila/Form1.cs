@@ -41,7 +41,7 @@ namespace MotornaVozila
                 MessageBox.Show(kupac.ime);
                 MessageBox.Show(vozilo.modelVozila);
                 MessageBox.Show(servis.salon.grad);
-                MessageBox.Show((zaposleni.plata).ToString());
+                //MessageBox.Show((zaposleni.plata).ToString());
 
                 s.Close();
             }
@@ -67,10 +67,10 @@ namespace MotornaVozila
                 zaposleni.datumZaposlenja = Convert.ToDateTime("01/01/2015");
                 zaposleni.datumRodjenja = Convert.ToDateTime("01/01/1995");
                 zaposleni.stepenStrucneSpreme = 7;
-                zaposleni.plata = 540000;
+                //zaposleni.plata = 540000;
                 zaposleni.tipZaposlenog = "tehnicar";
                 zaposleni.tipUgovora = "za stalno";
-                zaposleni.datumIstekaUgovora = Convert.ToDateTime(null); // proveriti kako insertovati u bazi null 
+                //zaposleni.datumIstekaUgovora = Convert.ToDateTime(null); // proveriti kako insertovati u bazi null 
                 
 
                 s.SaveOrUpdate(zaposleni);

@@ -43,60 +43,83 @@ namespace MotornaVozila
                 dgvKupac.RowHeadersVisible = false;
             };
 
-            GetData();
+            cb_prikaz.SelectedIndex = 0;
+            GetData("fizicko");
+            txt_pib.Enabled = false;
         }
 
-        private void GetData()
+        private void GetData(string tipLica)
         {
-            _kupci = new DataTable();
-
-            _kupci.Columns.Add("IdKupac");
-            _kupci.Columns.Add("Ime");
-            _kupci.Columns.Add("Prezime");
-            _kupci.Columns.Add("Telefon");
-            _kupci.Columns.Add("TipLica");
-            _kupci.Columns.Add("PIB");
-            _kupci.Columns.Add("MATBR");
-
             ISession session = DataLayer.GetSession();
 
-            var kupci = (from kpc in session.Query<Kupac>()
-                           select kpc).ToList();
-
-            foreach (var kpc in kupci)
+            if (tipLica == "pravno")
             {
-                var newRow = _kupci.NewRow();
+                List<Pravno> kupci = (from kpc in session.Query<Pravno>()
+                            select kpc).ToList();
 
-                newRow[0] = kpc.id;
-                newRow[1] = kpc.ime;
-                newRow[2] = kpc.prezime;
-                newRow[3] = kpc.telefon;
-                newRow[4] = kpc.tipLica;
+                _kupci = new DataTable();
 
-                if (kpc.GetType().ToString().Split('.')[2].ToLower() == "pravno")
+                _kupci.Columns.Add("IdKupac");
+                _kupci.Columns.Add("Ime");
+                _kupci.Columns.Add("Prezime");
+                _kupci.Columns.Add("Telefon");
+                _kupci.Columns.Add("TipLica");
+                _kupci.Columns.Add("PIB");
+
+                foreach (var kpc in kupci)
                 {
+                    var newRow = _kupci.NewRow();
+
+                    newRow[0] = kpc.id;
+                    newRow[1] = kpc.ime;
+                    newRow[2] = kpc.prezime;
+                    newRow[3] = kpc.telefon;
+                    newRow[4] = kpc.tipLica;
                     newRow[5] = kpc.pib;
-                    newRow[6] = "";
-                }
-                else
-                {
-                    newRow[5] = "";
-                    newRow[6] = kpc.maticniBroj;
+
+                    _kupci.Rows.Add(newRow);
                 }
 
-                _kupci.Rows.Add(newRow);
+                dgvKupac.DataSource = kupci;
+            }
+            else
+            {
+                var kupci = (from kpc in session.Query<Fizicko>()
+                             select kpc).ToList();
+
+                _kupci = new DataTable();
+
+                _kupci.Columns.Add("IdKupac");
+                _kupci.Columns.Add("Ime");
+                _kupci.Columns.Add("Prezime");
+                _kupci.Columns.Add("Telefon");
+                _kupci.Columns.Add("TipLica");
+                _kupci.Columns.Add("MatBr");
+
+                foreach (var kpc in kupci)
+                {
+                    var newRow = _kupci.NewRow();
+
+                    newRow[0] = kpc.id;
+                    newRow[1] = kpc.ime;
+                    newRow[2] = kpc.prezime;
+                    newRow[3] = kpc.telefon;
+                    newRow[4] = kpc.tipLica;
+                    newRow[5] = kpc.maticniBroj;
+
+                    _kupci.Rows.Add(newRow);
+                }
+                dgvKupac.DataSource = _kupci;
             }
 
-            dgvKupac.DataSource = _kupci;
-
-            dgvKupac.Columns["IdKupac"].Width = 60;
-            dgvKupac.Columns["Ime"].Width = 60;
-            dgvKupac.Columns["Prezime"].Width = 70;
-            dgvKupac.Columns["Telefon"].Width = 80;
-            dgvKupac.Columns["TipLica"].Width = 60;
-            dgvKupac.Columns["PIB"].Width = 60;
-
             session.Close();
+            
+            //dgvKupac.Columns["IdKupac"].Width = 60;
+            //dgvKupac.Columns["Ime"].Width = 60;
+            //dgvKupac.Columns["Prezime"].Width = 70;
+            //dgvKupac.Columns["Telefon"].Width = 80;
+            //dgvKupac.Columns["TipLica"].Width = 60;
+            //dgvKupac.Columns["PIB"].Width = 60;
         }
 
         private void dgvKupac_SelectionChanged(object sender, EventArgs e)
@@ -104,13 +127,15 @@ namespace MotornaVozila
             if (dgvKupac.SelectedRows.Count <= 0 || dgvKupac.DataSource == null)
                 return;
             else
-            {                
+            {
                 txt_ime.Text = dgvKupac.SelectedRows[0].Cells[1].Value.ToString();
                 txt_prezime.Text = dgvKupac.SelectedRows[0].Cells[2].Value.ToString();
                 txt_telefon.Text = dgvKupac.SelectedRows[0].Cells[3].Value.ToString();
                 cb_tip_lica.Text = dgvKupac.SelectedRows[0].Cells[4].Value.ToString();
-                txt_pib.Text = dgvKupac.SelectedRows[0].Cells[5].Value.ToString();
-                txt_mat_br.Text = dgvKupac.SelectedRows[0].Cells[6].Value.ToString();
+                if (cb_prikaz.Text == "pravno" || cb_prikaz.Text == string.Empty)
+                    txt_pib.Text = dgvKupac.SelectedRows[0].Cells[5].Value.ToString();
+                else
+                    txt_mat_br.Text = dgvKupac.SelectedRows[0].Cells[5].Value.ToString();
             }
         }
 
@@ -154,61 +179,63 @@ namespace MotornaVozila
                     switch (cb_tip_lica.Text)
                     {
                         case "fizicko":
-                            Fizicko fiz = new Fizicko();
-
-                            fiz.ime = txt_ime.Text;
-                            fiz.prezime = txt_prezime.Text;
-
-
-                            if (string.IsNullOrEmpty(txt_telefon.Text))
-                                fiz.telefon = null;
-                            else
-                                fiz.telefon = Double.Parse(txt_telefon.Text);
-
-                            fiz.maticniBroj = Double.Parse(txt_mat_br.Text);
-
-                            if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
                             {
-                                var vozilo = (from v in session.Query<Vozilo>()
-                                              where v.id == int.Parse(txt_id_kup_vozila.Text)
-                                              select v).SingleOrDefault();
-                                fiz.vozila.Add(vozilo);
-                            }
+                                Fizicko fiz = new Fizicko();
 
-                            session.Save(fiz);
-                            break;
+                                fiz.ime = txt_ime.Text;
+                                fiz.prezime = txt_prezime.Text;
+
+                                if (string.IsNullOrEmpty(txt_telefon.Text))
+                                    fiz.telefon = null;
+                                else
+                                    fiz.telefon = long.Parse(txt_telefon.Text);                                
+                               
+                                fiz.maticniBroj = long.Parse(txt_mat_br.Text);
+
+                                //if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
+                                //{
+                                //    var vozilo = (from v in session.Query<Vozilo>()
+                                //                  where v.id == int.Parse(txt_id_kup_vozila.Text)
+                                //                  select v).SingleOrDefault();
+                                //    fiz.vozila.Add(vozilo);
+                                //}
+
+                                session.Save(fiz);
+                                session.Flush();
+                                session.Close();
+                                GetData("fizicko");
+                                break;
+                            }
                         case "pravno":
-                            Pravno pravno = new Pravno();
-
-                            pravno.ime = txt_ime.Text;
-                            pravno.prezime = txt_prezime.Text;
-
-
-                            if (string.IsNullOrEmpty(txt_telefon.Text))
-                                pravno.telefon = null;
-                            else
-                                pravno.telefon = Double.Parse(txt_telefon.Text);
-
-                            pravno.pib = Double.Parse(txt_pib.Text);
-
-                            if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
                             {
-                                var vozilo = (from v in session.Query<Vozilo>()
-                                              where v.id == int.Parse(txt_id_kup_vozila.Text)
-                                              select v).SingleOrDefault();
-                                pravno.vozila.Add(vozilo);
+                                Pravno pravno = new Pravno();
+
+                                pravno.ime = txt_ime.Text;
+                                pravno.prezime = txt_prezime.Text;
+
+                                if (string.IsNullOrEmpty(txt_telefon.Text))
+                                    pravno.telefon = null;
+                                else
+                                    pravno.telefon = long.Parse(txt_telefon.Text);
+                                
+                                pravno.pib = long.Parse(txt_pib.Text);
+
+                                //if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
+                                //{
+                                //    var vozilo = (from v in session.Query<Vozilo>()
+                                //                  where v.id == int.Parse(txt_id_kup_vozila.Text)
+                                //                  select v).SingleOrDefault();
+                                //    pravno.vozila.Add(vozilo);
+                                //}
+
+                                session.Save(pravno);
+                                session.Flush();
+                                session.Close();
+                                GetData("pravno");
+                                break;
                             }
-
-                            session.Save(pravno);
-                            break;
-                        default:
-                            break;
-                    }                
-
-                    session.Flush();
-                    session.Close();
-
-                    GetData();
+                        default: break;           
+                    }    
                     noviKupac = false;
                 }
                 //azurira postojeceg kupca
@@ -224,37 +251,62 @@ namespace MotornaVozila
 
                     ISession session = DataLayer.GetSession();
                     int id = int.Parse(dgvKupac.SelectedRows[0].Cells[0].Value.ToString());
-                    Kupac kupac = session.Load<Kupac>(id);
-                      
-                    kupac.ime = txt_ime.Text;
-                    kupac.prezime = txt_prezime.Text;
-                    kupac.telefon = Double.Parse(txt_telefon.Text);
-                    kupac.tipLica = cb_tip_lica.Text;
 
-                    if (kupac.tipLica == "pravno")
+                    switch(cb_tip_lica.Text)
                     {
-                        kupac.pib = Double.Parse(txt_pib.Text);
-                        kupac.maticniBroj = null;
-                    }
-                    else
-                    {
-                        kupac.pib = null;
-                        kupac.maticniBroj = Double.Parse(txt_mat_br.Text);
-                    }
+                        case "pravno":
+                            {
+                                Pravno kupac = session.Load<Pravno>(id);
 
-                    if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
-                    {
-                        var vozilo = (from v in session.Query<Vozilo>()
-                                      where v.id == int.Parse(txt_id_kup_vozila.Text)
-                                      select v).SingleOrDefault();
-                        kupac.vozila.Add(vozilo);
-                    }
+                                kupac.ime = txt_ime.Text;
+                                kupac.prezime = txt_prezime.Text;
 
-                    session.SaveOrUpdate(kupac);
+                                if (string.IsNullOrEmpty(txt_telefon.Text))
+                                    kupac.telefon = null;
+                                else
+                                kupac.telefon = long.Parse(txt_telefon.Text);
+                                
+                                kupac.pib = long.Parse(txt_pib.Text);
+                                
+                                //if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
+                                //{
+                                //    var vozilo = (from v in session.Query<Vozilo>()
+                                //                  where v.id == int.Parse(txt_id_kup_vozila.Text)
+                                //                  select v).SingleOrDefault();
+                                //    kupac.vozila.Add(vozilo);
+                                //}
 
-                    session.Flush();
-                    session.Close();
-                    GetData();
+                                session.SaveOrUpdate(kupac);
+                                session.Flush();
+                                session.Close();
+                                GetData("pravno");
+                                break;
+                            }
+                        case "fizicko":
+                            {
+                                Fizicko kupac = session.Load<Fizicko>(id);
+
+                                kupac.ime = txt_ime.Text;
+                                kupac.prezime = txt_prezime.Text;
+                                kupac.telefon = long.Parse(txt_telefon.Text);
+                                kupac.tipLica = cb_tip_lica.Text;
+                                kupac.maticniBroj = long.Parse(txt_mat_br.Text);
+
+                                //if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
+                                //{
+                                //    var vozilo = (from v in session.Query<Vozilo>()
+                                //                  where v.id == int.Parse(txt_id_kup_vozila.Text)
+                                //                  select v).SingleOrDefault();
+                                //    kupac.vozila.Add(vozilo);
+                                //}
+
+                                session.SaveOrUpdate(kupac);
+                                session.Flush();
+                                session.Close();
+                                GetData("fizicko");
+                                break;
+                            }
+                    }  
                 }
             }
             catch (Exception catchException)
@@ -294,11 +346,43 @@ namespace MotornaVozila
                 session.Flush();
                 session.Close();
 
-                GetData();
+                GetData(cb_prikaz.Text);
             }
             catch (Exception catchException)
             {
                 MessageBox.Show(catchException.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cb_prikaz_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cb_prikaz.Text == "pravno")
+            {
+                GetData("pravno");
+                txt_mat_br.Enabled = false;
+                txt_mat_br.Text = string.Empty;
+                txt_pib.Enabled = true;
+            }
+            else
+            {
+                GetData("fizicko");
+                txt_pib.Enabled = false;
+                txt_pib.Text = string.Empty;
+                txt_mat_br.Enabled = true;
+            }
+        }
+
+        private void cb_tip_lica_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cb_tip_lica.Text == "pravno")
+            {
+                txt_pib.Enabled = true;
+                txt_mat_br.Enabled = false;
+            }
+            else
+            {
+                txt_pib.Enabled = false;
+                txt_mat_br.Enabled = true;
             }
         }
     }

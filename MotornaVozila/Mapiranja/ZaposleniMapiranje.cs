@@ -17,6 +17,8 @@ namespace MotornaVozila.Mapiranja
             // Mapiranje primarnog kljuca
             Id(x => x.id, "ID").GeneratedBy.TriggerIdentity();
 
+            DiscriminateSubClassesOnColumn("TIPUGOVORA");
+
             // Mapiranje svojstava
             Map(x => x.maticniBroj, "MATBR");
             Map(x => x.ime, "IME");
@@ -25,10 +27,10 @@ namespace MotornaVozila.Mapiranja
             Map(x => x.datumZaposlenja, "DATUMZAPOSLENJA");
             Map(x => x.datumRodjenja, "DATUMRODJENJA");
             Map(x => x.stepenStrucneSpreme, "STEPENSTSPREME");
-            Map(x => x.plata, "PLATA");
+            //Map(x => x.plata, "PLATA");
             Map(x => x.tipZaposlenog, "TIPZAPOSLENOG");
-            Map(x => x.tipUgovora, "TIPUGOVORA");
-            Map(x => x.datumIstekaUgovora, "DATUMISTEKAUGOVORA");
+            //Map(x => x.tipUgovora, "TIPUGOVORA");
+            //Map(x => x.datumIstekaUgovora, "DATUMISTEKAUGOVORA");
 
             // mapiranje veze odgovorniTehnicar 1:N
             // lazyload svojstvo je podrazumevano, iskljucuje se sa .not.lazyload();
@@ -39,4 +41,25 @@ namespace MotornaVozila.Mapiranja
                 .ParentKeyColumn("IDTEHNICAR").ChildKeyColumn("ID").Inverse().Cascade.All();
         }
     }
+
+    class ZaStalnoMapiranje : SubclassMap<ZaStalno>
+    {
+        public ZaStalnoMapiranje()
+        {
+            DiscriminatorValue("za stalno");
+            Map(x => x.plata, "PLATA");
+            Map(x => x.tipUgovora, "TIPUGOVORA");
+        }
+    }
+
+    class NaOdredjenoMapiranje : SubclassMap<NaOdredjeno>
+    {
+        public NaOdredjenoMapiranje()
+        {
+            DiscriminatorValue("na odredjeno");
+            Map(x => x.datumIstekaUgovora, "DATUMISTEKAUGOVORA");
+            Map(x => x.tipUgovora, "TIPUGOVORA");
+        }
+    }
+
 }

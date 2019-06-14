@@ -21,9 +21,9 @@ namespace MotornaVozila.Entiteti
         //public virtual int idServis { get; protected set; }
         public virtual float? kubikaza { get; set; }
         public virtual DateTime? datumUvoza { get; set; }
-        public virtual int? brojPutnika { get; set; }
-        public virtual string tipProstora { get; set; }
-        public virtual Double? nosivost { get; set; }
+        //public virtual int? brojPutnika { get; set; }
+        //public virtual string tipProstora { get; set; }
+        //public virtual Double? nosivost { get; set; }
         public virtual DateTime? datumKupovine { get; set; }
         public virtual string poznato { get; set; } // da li pretvoriti u bool?
         public virtual string opisProblema { get; set; }
@@ -37,5 +37,16 @@ namespace MotornaVozila.Entiteti
         public virtual Kupac kupac { get; set; }
         public virtual Servis servis { get; set; }
         public virtual Salon salon { get; set; }
+    }
+
+    public class Putnicko : Vozilo
+    {
+        public virtual int brojPutnika { get; set; }
+    }
+
+    public class Teretno : Vozilo
+    {
+        public virtual string tipProstora { get; set; }
+        public virtual Double nosivost { get; set; }
     }
 }

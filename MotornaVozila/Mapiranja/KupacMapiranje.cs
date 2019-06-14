@@ -21,7 +21,7 @@ namespace MotornaVozila.Mapiranja
             Map(x => x.ime, "IME");
             Map(x => x.prezime, "PREZIME");
             Map(x => x.telefon, "TELEFON");
-            Map(x => x.tipLica, "TIPLICA");
+            //Map(x => x.tipLica, "TIPLICA");
             //Map(x => x.pib, "PIB");
             //Map(x => x.maticniBroj, "MATBR");
 
@@ -35,6 +35,7 @@ namespace MotornaVozila.Mapiranja
         {
             DiscriminatorValue("fizicko");
             Map(x => x.maticniBroj, "MATBR");
+            Map(x => x.tipLica, "TIPLICA");
         }
     }
 
@@ -44,6 +45,7 @@ namespace MotornaVozila.Mapiranja
         {
             DiscriminatorValue("pravno");
             Map(x => x.pib, "PIB");
+            Map(x => x.tipLica, "TIPLICA");
         }
     }
 }
