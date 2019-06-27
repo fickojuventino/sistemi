@@ -80,7 +80,7 @@ namespace MotornaVozila
                     _kupci.Rows.Add(newRow);
                 }
 
-                dgvKupac.DataSource = kupci;
+                dgvKupac.DataSource = _kupci;
             }
             else
             {
@@ -192,13 +192,13 @@ namespace MotornaVozila
                                
                                 fiz.maticniBroj = long.Parse(txt_mat_br.Text);
 
-                                //if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
-                                //{
-                                //    var vozilo = (from v in session.Query<Vozilo>()
-                                //                  where v.id == int.Parse(txt_id_kup_vozila.Text)
-                                //                  select v).SingleOrDefault();
-                                //    fiz.vozila.Add(vozilo);
-                                //}
+                                if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
+                                {
+                                    var vozilo = (from v in session.Query<Vozilo>()
+                                                  where v.id == int.Parse(txt_id_kup_vozila.Text)
+                                                  select v).SingleOrDefault();
+                                    fiz.vozila.Add(vozilo);
+                                }
 
                                 session.Save(fiz);
                                 session.Flush();
@@ -220,13 +220,13 @@ namespace MotornaVozila
                                 
                                 pravno.pib = long.Parse(txt_pib.Text);
 
-                                //if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
-                                //{
-                                //    var vozilo = (from v in session.Query<Vozilo>()
-                                //                  where v.id == int.Parse(txt_id_kup_vozila.Text)
-                                //                  select v).SingleOrDefault();
-                                //    pravno.vozila.Add(vozilo);
-                                //}
+                                if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
+                                {
+                                    var vozilo = (from v in session.Query<Vozilo>()
+                                                  where v.id == int.Parse(txt_id_kup_vozila.Text)
+                                                  select v).SingleOrDefault();
+                                    pravno.vozila.Add(vozilo);
+                                }
 
                                 session.Save(pravno);
                                 session.Flush();
@@ -267,14 +267,14 @@ namespace MotornaVozila
                                 kupac.telefon = long.Parse(txt_telefon.Text);
                                 
                                 kupac.pib = long.Parse(txt_pib.Text);
-                                
-                                //if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
-                                //{
-                                //    var vozilo = (from v in session.Query<Vozilo>()
-                                //                  where v.id == int.Parse(txt_id_kup_vozila.Text)
-                                //                  select v).SingleOrDefault();
-                                //    kupac.vozila.Add(vozilo);
-                                //}
+
+                                if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
+                                {
+                                    var vozilo = (from v in session.Query<Vozilo>()
+                                                  where v.id == int.Parse(txt_id_kup_vozila.Text)
+                                                  select v).SingleOrDefault();
+                                    kupac.vozila.Add(vozilo);
+                                }
 
                                 session.SaveOrUpdate(kupac);
                                 session.Flush();
@@ -292,13 +292,13 @@ namespace MotornaVozila
                                 kupac.tipLica = cb_tip_lica.Text;
                                 kupac.maticniBroj = long.Parse(txt_mat_br.Text);
 
-                                //if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
-                                //{
-                                //    var vozilo = (from v in session.Query<Vozilo>()
-                                //                  where v.id == int.Parse(txt_id_kup_vozila.Text)
-                                //                  select v).SingleOrDefault();
-                                //    kupac.vozila.Add(vozilo);
-                                //}
+                                if (!string.IsNullOrEmpty(txt_id_kup_vozila.Text))
+                                {
+                                    var vozilo = (from v in session.Query<Vozilo>()
+                                                  where v.id == int.Parse(txt_id_kup_vozila.Text)
+                                                  select v).SingleOrDefault();
+                                    kupac.vozila.Add(vozilo);
+                                }
 
                                 session.SaveOrUpdate(kupac);
                                 session.Flush();
