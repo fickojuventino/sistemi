@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C73AA318-950C-4CF9-8EE8-83949B306FC2}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MotornaVozila</RootNamespace>
     <AssemblyName>MotornaVozila</AssemblyName>
@@ -33,6 +33,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentNHibernate">
@@ -62,83 +65,75 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer.cs" />
-    <Compile Include="Dodaj_nEkonomistu.cs">
+    <Compile Include="DataProvider.cs" />
+    <Compile Include="Forms\Dodaj_nEkonomistu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dodaj_nEkonomistu.Designer.cs">
+    <Compile Include="Forms\Dodaj_nEkonomistu.Designer.cs">
       <DependentUpon>Dodaj_nEkonomistu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Employee\Azuriraj.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Employee\Azuriraj.Designer.cs">
-      <DependentUpon>Azuriraj.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\DodajZaposleni.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Employee\DodajZaposleni.Designer.cs">
-      <DependentUpon>DodajZaposleni.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Employee\PregledZaposleni.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Employee\PregledZaposleni.Designer.cs">
-      <DependentUpon>PregledZaposleni.cs</DependentUpon>
-    </Compile>
+    <Compile Include="DTOs\FizickoView.cs" />
+    <Compile Include="DTOs\NaOdredjenoView.cs" />
+    <Compile Include="DTOs\NezavisniEkonomistaView.cs" />
+    <Compile Include="DTOs\PravnoView.cs" />
+    <Compile Include="DTOs\PutnickoView.cs" />
+    <Compile Include="DTOs\SalonView.cs" />
+    <Compile Include="DTOs\ServisView.cs" />
+    <Compile Include="DTOs\TeretnoView.cs" />
+    <Compile Include="DTOs\ZaStalnoView.cs" />
     <Compile Include="Entiteti\Kupac.cs" />
     <Compile Include="Entiteti\NezavisniEkonomista.cs" />
     <Compile Include="Entiteti\Salon.cs" />
     <Compile Include="Entiteti\Servis.cs" />
     <Compile Include="Entiteti\Specijalnost.cs" />
     <Compile Include="Entiteti\Vozilo.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Entiteti\Zaposleni.cs" />
-    <Compile Include="frmKupac.cs">
+    <Compile Include="Forms\frmKupac.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmKupac.Designer.cs">
+    <Compile Include="Forms\frmKupac.Designer.cs">
       <DependentUpon>frmKupac.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNezavisniEkonomista.cs">
+    <Compile Include="Forms\frmNezavisniEkonomista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNezavisniEkonomista.Designer.cs">
+    <Compile Include="Forms\frmNezavisniEkonomista.Designer.cs">
       <DependentUpon>frmNezavisniEkonomista.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSalon.cs">
+    <Compile Include="Forms\frmSalon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSalon.Designer.cs">
+    <Compile Include="Forms\frmSalon.Designer.cs">
       <DependentUpon>frmSalon.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmServisi.cs">
+    <Compile Include="Forms\frmServisi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmServisi.Designer.cs">
+    <Compile Include="Forms\frmServisi.Designer.cs">
       <DependentUpon>frmServisi.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSpecijalnost.cs">
+    <Compile Include="Forms\frmSpecijalnost.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSpecijalnost.Designer.cs">
+    <Compile Include="Forms\frmSpecijalnost.Designer.cs">
       <DependentUpon>frmSpecijalnost.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmVozilo.cs">
+    <Compile Include="Forms\frmVozilo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmVozilo.Designer.cs">
+    <Compile Include="Forms\frmVozilo.Designer.cs">
       <DependentUpon>frmVozilo.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmZaposleni.cs">
+    <Compile Include="Forms\frmZaposleni.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmZaposleni.Designer.cs">
+    <Compile Include="Forms\frmZaposleni.Designer.cs">
       <DependentUpon>frmZaposleni.cs</DependentUpon>
     </Compile>
     <Compile Include="Mapiranja\KupacMapiranje.cs" />
@@ -150,40 +145,31 @@
     <Compile Include="Mapiranja\ZaposleniMapiranje.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Dodaj_nEkonomistu.resx">
+    <EmbeddedResource Include="Forms\Dodaj_nEkonomistu.resx">
       <DependentUpon>Dodaj_nEkonomistu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Employee\Azuriraj.resx">
-      <DependentUpon>Azuriraj.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Employee\DodajZaposleni.resx">
-      <DependentUpon>DodajZaposleni.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Employee\PregledZaposleni.resx">
-      <DependentUpon>PregledZaposleni.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmKupac.resx">
+    <EmbeddedResource Include="Forms\frmKupac.resx">
       <DependentUpon>frmKupac.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNezavisniEkonomista.resx">
+    <EmbeddedResource Include="Forms\frmNezavisniEkonomista.resx">
       <DependentUpon>frmNezavisniEkonomista.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSalon.resx">
+    <EmbeddedResource Include="Forms\frmSalon.resx">
       <DependentUpon>frmSalon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmServisi.resx">
+    <EmbeddedResource Include="Forms\frmServisi.resx">
       <DependentUpon>frmServisi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSpecijalnost.resx">
+    <EmbeddedResource Include="Forms\frmSpecijalnost.resx">
       <DependentUpon>frmSpecijalnost.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmVozilo.resx">
+    <EmbeddedResource Include="Forms\frmVozilo.resx">
       <DependentUpon>frmVozilo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmZaposleni.resx">
+    <EmbeddedResource Include="Forms\frmZaposleni.resx">
       <DependentUpon>frmZaposleni.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
