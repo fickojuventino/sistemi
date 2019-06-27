@@ -67,10 +67,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer.cs" />
+<<<<<<< HEAD
     <Compile Include="DataProviders\NezavisniEkonomistaProvider.cs" />
     <Compile Include="DataProviders\PutnickoProvider.cs" />
     <Compile Include="DataProviders\SalonProvider.cs" />
     <Compile Include="DataProviders\TeretnoProvider.cs" />
+=======
+    <Compile Include="DataProviders\ZaposleniProvider.cs" />
+>>>>>>> a5b6c2818cf3de274afd29e4303db999163c312e
     <Compile Include="Forms\Dodaj_nEkonomistu.cs">
       <SubType>Form</SubType>
     </Compile>
