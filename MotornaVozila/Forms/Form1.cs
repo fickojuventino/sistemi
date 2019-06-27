@@ -228,5 +228,10 @@ namespace MotornaVozila
             fz.ShowDialog();
             fz.Dispose();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

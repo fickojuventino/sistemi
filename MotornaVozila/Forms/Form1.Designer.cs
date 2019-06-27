@@ -121,6 +121,7 @@
             this.Controls.Add(this.btnServis);
             this.Name = "Form1";
             this.Text = "Motorna Vozila";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
